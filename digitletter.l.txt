@@ -1,0 +1,32 @@
+%{
+#include <stdio.h>
+#include <string.h>
+%}
+
+%option noyywrap
+
+DIGIT [0-9]
+LETTER [a-zA-Z]
+WORD {LETTER}+
+NUMBER {DIGIT}+(\.{DIGIT}+)?
+
+%%
+
+{NUMBER} {
+    printf("Number: %s\n", yytext);
+}
+
+{WORD} {
+    printf("Word: %s\n", yytext);
+}
+
+. {
+    // Ignore any other characters
+}
+
+%%
+
+int main() {
+    yylex();
+    return 0;
+}
